@@ -7,9 +7,9 @@ using Dominio;
 
 namespace Negocio
 {
-    public class ArticuloNegocio
+    public class ArticuloNegocio 
     {
-        public List<Articulo> listar() //1. Metodo para que lea los registros de la base de datos
+        public List<Articulo> listar()
         {
             List<Articulo> lista = new List<Articulo>();
             AccesoDatos datos = new AccesoDatos();
@@ -54,10 +54,7 @@ namespace Negocio
             AccesoDatos datos = new AccesoDatos();
             try
             {
-                // Insertar artículo y obtener el ID recién creado
                 datos.setearConsulta("INSERT INTO ARTICULOS (Codigo, Nombre, Descripcion, Precio, IdMarca, IdCategoria) VALUES (@Codigo, @Nombre, @Descripcion, @Precio, @IDMarca, @IDCategoria)");
-                // +"SELECT SCOPE_IDENTITY();";
-
                 datos.setearParametros("@Codigo", nuevo.Codigo);
                 datos.setearParametros("@Nombre", nuevo.Nombre);
                 datos.setearParametros("@Descripcion", nuevo.Descripcion);
