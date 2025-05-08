@@ -28,8 +28,10 @@ namespace Negocio
 
             aux.Categoria.Descripcion = (string)datos.Lector["Categoria"];
             aux.Precio = datos.Lector["Precio"] != DBNull.Value ? Convert.ToSingle(datos.Lector["Precio"]) : 0;
-            aux.Imagen = new Imagen();
-            aux.Imagen.Url = datos.Lector["ImagenUrl"] != DBNull.Value ? datos.Lector["ImagenUrl"].ToString() : "";
+            aux.Imagen = new List<Imagen>();
+
+            aux.Imagen[0].Url = datos.Lector["ImagenUrl"] != DBNull.Value ? datos.Lector["ImagenUrl"].ToString() : ""; 
+
             lista.Add(aux);
             try
             {
@@ -66,11 +68,11 @@ namespace Negocio
                 nuevo.Id = datos.ejecutarScalar();
 
                 // Si hay imagen, insertarla con el ID del artículo
-                if (!string.IsNullOrEmpty(nuevo.Imagen.Url))
+                if (!string.IsNullOrEmpty(nuevo.Imagen[0].Url))
                 {
                     datos.setearConsulta("INSERT INTO IMAGENES (IdArticulo, ImagenUrl) VALUES (@IdArticulo, @ImagenUrl)");
                     datos.setearParametros("@IdArticulo", nuevo.Id);
-                    datos.setearParametros("@ImagenUrl", nuevo.Imagen.Url);
+                    datos.setearParametros("@ImagenUrl", nuevo.Imagen[0].Url);
                     datos.ejecutarAccion();
                 }
             }
