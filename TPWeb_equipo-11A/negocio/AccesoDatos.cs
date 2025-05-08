@@ -93,7 +93,7 @@ namespace Negocio
             }
             finally
             {
-                conexion.Close();
+                cerrarConexion();
             }
         }
     }

@@ -25,8 +25,7 @@ namespace TPWeb_equipo_11A
         public void cargar()
         {
             ArticuloNegocio negocio = new ArticuloNegocio();
-            lista = negocio.listar();
-            GridView1.DataSource = lista;
+            GridView1.DataSource = negocio.listar();
             GridView1.DataBind();
         }
 
