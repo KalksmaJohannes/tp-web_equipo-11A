@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net;
 using System.Text;
 using System.Threading.Tasks;
 using Dominio;
@@ -9,35 +10,66 @@ namespace Negocio
 {
     public class ArticuloNegocio 
     {
-        public List<Articulo> listar()
+        public List<Articulo> listar() //1. Metodo para que lea los registros de la base de datos
         {
             List<Articulo> lista = new List<Articulo>();
             AccesoDatos datos = new AccesoDatos();
-            Articulo aux = new Articulo();
-            aux.Id = (int)datos.Lector["Id"] != null ? (int)datos.Lector["Id"] : 1;
-            aux.Codigo = (string)datos.Lector["Codigo"];
-            aux.Nombre = (string)datos.Lector["Nombre"];
-            aux.Descripcion = (string)datos.Lector["Descripcion"];
-
-            aux.Marca = new Marca();
-            aux.Marca.Id = (int)datos.Lector["IdMarca"];
-            aux.Marca.Descripcion = (string)datos.Lector["Marca"];
-            aux.Categoria = new Categoria();
-            aux.Categoria.Id = (int)datos.Lector["IdCategoria"];
-            //aux.ID_Categoria = Convert.ToInt32(datos.Lector["IDCategoria"]);
-
-            aux.Categoria.Descripcion = (string)datos.Lector["Categoria"];
-            aux.Precio = datos.Lector["Precio"] != DBNull.Value ? Convert.ToSingle(datos.Lector["Precio"]) : 0;
-            aux.Imagen = new List<Imagen>();
-
-            aux.Imagen[0].Url = datos.Lector["ImagenUrl"] != DBNull.Value ? datos.Lector["ImagenUrl"].ToString() : ""; 
-
-            lista.Add(aux);
             try
             {
-                datos.setearConsulta("select A.Id,A.nombre, A.codigo, A.descripcion, A.IdCategoria as IdCategoria, A.IdMarca as IdMarca, M.Descripcion as Marca, C.Descripcion as Categoria, A.Precio, I.ImagenUrl FROM ARTICULOS A INNER JOIN MARCAS M ON A.IdMarca = M.Id INNER JOIN CATEGORIAS C ON A.IdCategoria = C.Id INNER JOIN IMAGENES I ON A.Id = I.IdArticulo");
+
+                datos.setearConsulta("select A.Id,A.nombre, A.codigo, A.descripcion, A.IdCategoria as IdCategoria, A.IdMarca as IdMarca, M.Descripcion as Marca, C.Descripcion as Categoria, A.Precio, I.ImagenUrl as ImagenUrl, I.Id as IdImagen\r\nFROM ARTICULOS A \r\nINNER JOIN MARCAS M ON A.IdMarca = M.Id \r\nINNER JOIN CATEGORIAS C ON A.IdCategoria = C.Id \r\nINNER JOIN IMAGENES I ON A.Id = I.IdArticulo");
                 datos.ejecutarLectura();
+
+                while (datos.Lector.Read())
+                {
+                    int id = (int)datos.Lector["Id"];
+                    Articulo existente = lista.FirstOrDefault(a => a.Id == id);
+                    if(existente == null)
+                    {
+                        Articulo aux = new Articulo();
+                        aux.Id = id;
+                        aux.Codigo = (string)datos.Lector["Codigo"];
+                        aux.Nombre = (string)datos.Lector["Nombre"];
+                        aux.Descripcion = (string)datos.Lector["Descripcion"];
+
+                        aux.Marca = new Marca();
+                        aux.Marca.Id = (int)datos.Lector["IdMarca"];
+                        aux.Marca.Descripcion = (string)datos.Lector["Marca"];
+                        aux.Categoria = new Categoria();
+                        aux.Categoria.Id = (int)datos.Lector["IdCategoria"];
+                        //aux.ID_Categoria = Convert.ToInt32(datos.Lector["IDCategoria"]);
+
+                        aux.Categoria.Descripcion = (string)datos.Lector["Categoria"];
+                        aux.Precio = datos.Lector["Precio"] != DBNull.Value ? Convert.ToSingle(datos.Lector["Precio"]) : 0;
+                        //aux.Imagen = new Imagen();
+                        //aux.Imagen.Url = datos.Lector["ImagenUrl"] != DBNull.Value ? datos.Lector["ImagenUrl"].ToString() : "";
+                        aux.Imagen = new List<Imagen>();
+                        if (datos.Lector["IdImagen"] != DBNull.Value)
+                        {
+                            aux.Imagen.Add(new Imagen
+                            {
+                                Id = (int)datos.Lector["IdImagen"],
+                                Url = (string)datos.Lector["ImagenUrl"]
+                            });
+                        }
+                        lista.Add(aux);
+                    } else
+                    {
+                        if(datos.Lector["IdImagen"] != DBNull.Value)
+                        {
+                            existente.Imagen.Add(new Imagen
+                            {
+                                Id = (int)datos.Lector["IdImagen"],
+                                Url = (string)datos.Lector["ImagenUrl"]
+                            });
+                        }
+
+                    }
+
+                }
+
                 return lista;
+
             }
             catch (Exception ex)
             {
