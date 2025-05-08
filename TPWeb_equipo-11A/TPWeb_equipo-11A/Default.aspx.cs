@@ -36,7 +36,7 @@ namespace TPWeb_equipo_11A
                 // Manejo simple de errores
                 Response.Write("Error al cargar datos: " + ex.Message);
             }
-            finally
+            finally //COMENT
             {
                 datos.cerrarConexion();
             }
