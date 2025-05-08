@@ -7,7 +7,7 @@ using Dominio;
 
 namespace Negocio
 {
-    internal class ArticuloNegocio
+    public class ArticuloNegocio
     {
         public List<Articulo> listar() //1. Metodo para que lea los registros de la base de datos
         {
