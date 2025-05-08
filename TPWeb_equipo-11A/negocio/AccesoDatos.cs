@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace Negocio
 {
-    internal class AccesoDatos
+    public class AccesoDatos
     {
         private SqlConnection conexion;
         private SqlCommand comando;
@@ -27,7 +27,6 @@ namespace Negocio
                 "server=.\\SQLEXPRESS; database=PROMOS_DB; integrated security=true"
                 );
             comando = new SqlCommand();
-
         }
 
         public void setearConsulta(string consulta)
