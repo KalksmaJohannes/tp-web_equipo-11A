@@ -13,22 +13,37 @@ namespace TPWeb_equipo_11A
 {
     public partial class Default : System.Web.UI.Page
     {
-        private List<Articulo> lista;
+        public ArticuloNegocio negocio = new ArticuloNegocio();
+        public List<Articulo> lista;
         protected void Page_Load(object sender, EventArgs e)
         {
             if (!IsPostBack)
             {
                 cargar();
+                RepeaterProducto.ItemDataBound += RepeaterProducto_ItemDataBound;
             }
         }
 
         public void cargar()
         {
-            ArticuloNegocio negocio = new ArticuloNegocio();
-            GridView1.DataSource = negocio.listar();
-            GridView1.DataBind();
+            lista = negocio.listar();
+            RepeaterProducto.DataSource = lista;
+            RepeaterProducto.DataBind();
         }
 
-    
+        protected void RepeaterProducto_ItemDataBound(object sender, RepeaterItemEventArgs e)
+        {
+            if (e.Item.ItemType == ListItemType.Item || e.Item.ItemType == ListItemType.AlternatingItem)
+            {
+                Articulo articulo = (Articulo)e.Item.DataItem;
+
+                Repeater rptImagenes = (Repeater)e.Item.FindControl("RepeaterImagen");
+                if (rptImagenes != null && articulo.Imagen != null)
+                {
+                    rptImagenes.DataSource = articulo.Imagen;
+                    rptImagenes.DataBind();
+                }
+            }
+        }
     }
 }
