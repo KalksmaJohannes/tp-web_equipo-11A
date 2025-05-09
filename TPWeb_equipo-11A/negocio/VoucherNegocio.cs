@@ -32,6 +32,31 @@ namespace Negocio
             }
         }
 
+        public bool estaCanjeado(string codigo)
+        {
+            AccesoDatos datos = new AccesoDatos();
+            // Verifica si ya fue utilizado (FechaCanje no es null)
+            try
+            {
+                datos.setearConsulta("SELECT COUNT(*) FROM VOUCHERS WHERE CodigoVoucher = @codigo AND FechaCanje IS NOT NULL");
+                datos.setearParametros("@codigo", codigo);
+
+                int cantidad = datos.ejecutarScalar(); // usa tu método personalizado
+                return cantidad > 0; // Si hay al menos uno, está canjeado
+
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+            finally
+            {
+                datos.cerrarConexion();
+            }
+            
+        }
+
 
     }
 }
