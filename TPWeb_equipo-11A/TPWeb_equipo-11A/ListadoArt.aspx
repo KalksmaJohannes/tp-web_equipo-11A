@@ -9,13 +9,19 @@
             <ItemTemplate>
                 <div class="col-4">
                     <div class="card" style="width: 18rem;">
-                        <asp:Repeater runat="server" ID="RepeaterImagen">
-                            <ItemTemplate>
-                                <asp:Image ID="Image" runat="server" ImageUrl='<%#Eval ("Url") %>'/>
-                            </ItemTemplate>
-                        </asp:Repeater>    
+                        <div id="carouselExampleSlidesOnly" class="carousel slide" data-bs-ride="carousel">
+                            <div class="carousel-inner">
+                                <asp:Repeater runat="server" ID="RepeaterImagen">
+                                    <ItemTemplate>
+                                        <div class="carousel-item <%# Container.ItemIndex == 0 ? "active" : "" %>">
+                                            <asp:Image ID="Image" runat="server" ImageUrl='<%#Eval ("Url") %>' />
+                                        </div>
+                                    </ItemTemplate>
+                                </asp:Repeater>
+                            </div>
+                        </div>
                         <div class="card-body">
-                            <h5 class="card-title" ><%#Eval("Nombre") %></h5>
+                            <h5 class="card-title"><%#Eval("Nombre") %></h5>
                             <p class="card-text"><%#Eval ("Descripcion")%></p>
                             <a href="#" class="btn btn-primary">Go somewhere</a>
                         </div>
