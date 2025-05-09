@@ -66,6 +66,7 @@
     <Reference Include="System.EnterpriseServices" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="estilos.css" />
     <Content Include="ListadoArt.aspx" />
     <Content Include="Global.asax" />
     <Content Include="Default.aspx" />
