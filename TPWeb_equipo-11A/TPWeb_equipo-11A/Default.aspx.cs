@@ -29,6 +29,18 @@ namespace TPWeb_equipo_11A
             {
                 // Código válido
                 //SI EXISTE EL VOUCHER SE DEBE REDIRIGIR A LA PÁGINA QUE CONTENGA LOS PRODUCTOS QUE SE PUEDEN CANJEAR 
+                ScriptManager.RegisterStartupScript(
+                this,
+                GetType(),
+                        "alertaValido",
+                            "window.onload = function() { " + "alert('¡Genial! Tu código se validó EXITOSAMENTE'); " + "window.location.href = 'ListadoArt.aspx';" + "};",
+                true
+                 );
+                //Permite obtener luego la variable del código desde otra ventana. En la otra ventana se invoca con:
+                //poniendo como propiedad de la clase por ejemplo cod, y luego la siguiente sintaxis: Se pone TOstring porque devuelve un obj
+                //cod = Session["codigovoucher"].ToString(); 
+                Session.Add("codigovoucher", codigo);
+                
             }
         }
     }
