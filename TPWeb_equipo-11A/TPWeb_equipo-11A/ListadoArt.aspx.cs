@@ -45,5 +45,10 @@ namespace TPWeb_equipo_11A
                 }
             }
         }
+
+        protected void btnCanjear_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }
