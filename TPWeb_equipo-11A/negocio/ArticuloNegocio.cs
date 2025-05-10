@@ -84,7 +84,7 @@ namespace Negocio
 
         }
 
-        public void verArticulo(int id)
+        public void buscarArticulo(int id)
         {
             
 

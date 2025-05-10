@@ -53,11 +53,6 @@ namespace TPWeb_equipo_11A
         {
             //en valor traigo el argumento que capture en el botón dentro del repeater 
             string valor = ((Button)sender).CommandArgument;
-
-            
-
-
-
         }
 
     }

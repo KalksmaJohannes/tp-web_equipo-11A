@@ -10,13 +10,13 @@
                     <div class="card">
                         <div id="carouselExampleSlidesOnly" class="carousel slide" data-bs-ride="carousel">
                             <div class="carousel-inner">
-                                 <asp:Repeater runat="server" ID="RepeaterImagen">
+                                <asp:Repeater runat="server" ID="RepeaterImagen">
                                     <ItemTemplate>
                                         <div class="carousel-item <%# Container.ItemIndex == 0 ? "active" : "" %>">
                                             <asp:Image ID="Image" runat="server" CssClass="card-img-top" ImageUrl='<%#Eval ("Url") %>' />
                                         </div>
                                     </ItemTemplate>
-                                 </asp:Repeater>
+                                </asp:Repeater>
                             </div>
                         </div>
                         <div class="card-body">
@@ -28,6 +28,23 @@
                 </div>
             </ItemTemplate>
         </asp:Repeater>
+        <div class="modal" tabindex="-1">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title">¿Desea canjear este artículo?</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        <p>Estas seguro que deseas seleccionar este articulo?</p>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                        <button type="button" class="btn btn-primary">Save changes</button>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
 
     <%--<div class="row" >
