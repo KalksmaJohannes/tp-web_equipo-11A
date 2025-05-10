@@ -53,7 +53,8 @@
          </label>
      </div>
 
-     <asp:Button ID="btnParticipar" runat="server" Text="¡Participar!" CssClass="btn btn-primary" />
+      <asp:ScriptManager ID="Registro" runat="server"></asp:ScriptManager>
+     <asp:Button ID="btnParticipar" runat="server" Text="¡Participar!" CssClass="btn btn-primary" OnClick="btnParticipar_Click" />
  </div>
 
 </asp:Content>

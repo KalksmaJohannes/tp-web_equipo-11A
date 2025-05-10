@@ -8,9 +8,38 @@ using Dominio;
 
 namespace Negocio
 {
-    internal class ClienteNegocio
+    public class ClienteNegocio
     {
-        public Cliente existeCliente(int documento)
+        public void agregarCliente(Cliente nuevo)
+        {
+            AccesoDatos datos = new AccesoDatos();
+
+            try
+            {
+                datos.setearConsulta("INSERT INTO Clientes (Documento, Nombre, Apellido, Email, Direccion, Ciudad, CP) VALUES (@Documento, @Nombre, @Apellido, @Email, @Direccion, @Ciudad, @CP)");
+
+                datos.setearParametros("@Documento", nuevo.Documento);
+                datos.setearParametros("@Nombre", nuevo.Nombre);
+                datos.setearParametros("@Apellido", nuevo.Apellido);
+                datos.setearParametros("@Email", nuevo.Email);
+                datos.setearParametros("@Direccion", nuevo.Direccion);
+                datos.setearParametros("@Ciudad", nuevo.Ciudad);
+                datos.setearParametros("@CP", nuevo.CodigoPostal);
+
+
+                datos.ejecutarAccion();
+            }
+            catch (Exception ex)
+            {
+
+                throw ex;
+            }
+            finally
+            {
+                datos.cerrarConexion();
+            }
+        }
+        public Cliente existeCliente(string documento)
         {
             AccesoDatos datos = new AccesoDatos();
             try
@@ -21,7 +50,7 @@ namespace Negocio
                 {
                     Cliente aux = new Cliente();
                     aux.Id = (int)datos.Lector["Id"];
-                    aux.Documento = (int)datos.Lector["Documento"];
+                    aux.Documento = (string)datos.Lector["Documento"];
                     aux.Apellido = (string)datos.Lector["Apellido"];
                     aux.Nombre = (string)datos.Lector["Nombre"];
                     aux.Email = (string)datos.Lector["Email"];
