@@ -83,6 +83,12 @@ namespace Negocio
             }
 
         }
+
+        public void verArticulo(int id)
+        {
+            
+
+        }
         public void agregarArticulo(Articulo nuevo)
         {
             AccesoDatos datos = new AccesoDatos();

@@ -24,12 +24,36 @@
                             <h5 class="card-title"><%#Eval("Nombre") %></h5>
                             <p class="card-text"><%#Eval ("Descripcion")%></p>
                             <asp:Button Text="CANJEAR" ID="btnCanjear" runat="server" CssClass="btn btn-primary" CommandArgument= '<%#Eval ("Id")%>' CommandName="ArticuloId" OnClick="btnCanjear_Click"/>
-  
+
                             
                         </div>
                     </div>
                 </div>
             </ItemTemplate>
         </asp:Repeater>
+        <div class="modal" tabindex="-1">
+        <div class="modal-dialog">
+        <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">¿Desea canjear este artículo?</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+          <asp:Label Text="text" runat="server" />   
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-primary">Save changes</button>
+      </div>
     </div>
+  </div>
+</div>
+    </div>
+  </div>
+</div>
+    </div>
+
+
 </asp:Content>
+
+
