@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Net;
@@ -84,11 +85,6 @@ namespace Negocio
 
         }
 
-        public void buscarArticulo(int id)
-        {
-            
-
-        }
         public void agregarArticulo(Articulo nuevo)
         {
             AccesoDatos datos = new AccesoDatos();
