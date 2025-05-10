@@ -3,6 +3,8 @@
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
+<% if (codigoVoucher != null)
+    {%>
     <div class="row row-cols-1 row-cols-md-3 g-4 text-center">
         <asp:Repeater runat="server" ID="RepeaterProducto" OnItemDataBound="RepeaterProducto_ItemDataBound">
             <ItemTemplate>
@@ -28,24 +30,16 @@
                 </div>
             </ItemTemplate>
         </asp:Repeater>
-        <div class="modal" tabindex="-1">
-            <div class="modal-dialog">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <h5 class="modal-title">¿Desea canjear este artículo?</h5>
-                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                    </div>
-                    <div class="modal-body">
-                        <p>Estas seguro que deseas seleccionar este articulo?</p>
-                    </div>
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                        <button type="button" class="btn btn-primary">Save changes</button>
-                    </div>
-                </div>
-            </div>
-        </div>
     </div>
+<%}
+    else
+    {%>
+    <div class="text-center">
+        <h2 >Aún no se ingresó un voucher</h2>
+        <p>No se encuentra un voucher canjeado, para ingresar un voucher <a href="/Default.aspx">click aqui</a></p>
+    </div>
+    
+    <%} %>
 
     <%--<div class="row" >
         <asp:Repeater runat="server" ID="RepeaterProducto" OnItemDataBound="RepeaterProducto_ItemDataBound">

@@ -15,9 +15,11 @@ namespace TPWeb_equipo_11A
     public partial class Default : System.Web.UI.Page
     {
         public ArticuloNegocio negocio = new ArticuloNegocio();
+        public string codigoVoucher; 
         public List<Articulo> lista;
         protected void Page_Load(object sender, EventArgs e)
         {
+            codigoVoucher = Session["codigoVoucher"] != null ? Session["codigoVoucher"].ToString() : null;
             if (!IsPostBack)
             {
                 cargar();
