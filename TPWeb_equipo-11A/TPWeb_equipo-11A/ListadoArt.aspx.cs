@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Data;
 using System.Linq;
+using System.Timers;
 using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
@@ -46,8 +47,12 @@ namespace TPWeb_equipo_11A
             }
         }
 
+        //El sender es el elemento que envía el evento
+
         protected void btnCanjear_Click(object sender, EventArgs e)
         {
+            //en valor traigo el argumento que capture en el botón dentro del repeater 
+            string valor = ((Button)sender).CommandArgument;
 
         }
     }
