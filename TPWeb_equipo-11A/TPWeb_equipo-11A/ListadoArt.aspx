@@ -3,17 +3,17 @@
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
-    <div class="row row-cols-1 row-cols-md-3 g-4">
+    <div class="row row-cols-1 row-cols-md-3 g-4 text-center">
         <asp:Repeater runat="server" ID="RepeaterProducto" OnItemDataBound="RepeaterProducto_ItemDataBound">
             <ItemTemplate>
                 <div class="col">
                     <div class="card">
-                        <div id="carouselExampleSlidesOnly" class="carousel slide" data-bs-ride="carousel">
+                        <div id="carouselExampleSlidesOnly" class="carousel slide" data-bs-ride="carousel" style="height:400px; align-content:center">
                             <div class="carousel-inner">
                                 <asp:Repeater runat="server" ID="RepeaterImagen">
                                     <ItemTemplate>
-                                        <div class="carousel-item <%# Container.ItemIndex == 0 ? "active" : "" %>">
-                                            <asp:Image ID="Image" runat="server" CssClass="card-img-top" ImageUrl='<%#Eval ("Url") %>' />
+                                        <div class="carousel-item <%# Container.ItemIndex == 0 ? "active" : "" %>" >
+                                            <asp:Image ID="Image" runat="server" ImageAlign="Middle" Width="200" CssClass="card-img-top" ImageUrl='<%#Eval ("Url") %>' />
                                         </div>
                                     </ItemTemplate>
                                 </asp:Repeater>

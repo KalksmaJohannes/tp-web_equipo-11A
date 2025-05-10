@@ -14,35 +14,31 @@
 </head>
 <body>
     <header>
-       <nav class="navbar navbar-expand bg-dark">
-  <div class="container-fluid">
-    <a class="navbar-brand text-white fw-bold" href="Default.aspx">
-      Promo Ganá!
-    </a>
-  </div>
-</nav>
-
+        <nav class="navbar navbar-expand bg-dark">
+            <div class="container-fluid">
+                <a class="navbar-brand text-white fw-bold" href="Default.aspx">Promo Ganá!
+                </a>
+            </div>
+        </nav>
     </header>
     <form id="form1" runat="server">
-        <div>
-            <div class="container text-center">
-            <asp:contentplaceholder id="contentplaceholder1" runat="server">
-            </asp:contentplaceholder>
-            </div>
+        <div class="container">
+            <asp:ContentPlaceHolder ID="contentplaceholder1" runat="server">
+            </asp:ContentPlaceHolder>
         </div>
+
     </form>
 
-    
-        <footer>
-  <nav class="navbar navbar-expand bg-dark">
-    <div class="container-fluid justify-content-center">
-      <span class="navbar-text text-white fw-bold">
-        Equipo 11A Programación III
-      </span>
-    </div>
-  </nav>
-</footer>
-   
-    
+
+    <footer>
+        <nav class="navbar navbar-expand bg-dark">
+            <div class="container-fluid justify-content-center">
+                <span class="navbar-text text-white fw-bold">Equipo 11A Programación III
+                </span>
+            </div>
+        </nav>
+    </footer>
+
+
 </body>
 </html>

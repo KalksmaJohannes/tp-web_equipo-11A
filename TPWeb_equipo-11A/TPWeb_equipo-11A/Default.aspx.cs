@@ -55,7 +55,7 @@ namespace TPWeb_equipo_11A
                 //Permite obtener luego la variable del código desde otra ventana. En la otra ventana se invoca con:
                 //poniendo como propiedad de la clase por ejemplo cod, y luego la siguiente sintaxis: Se pone TOstring porque devuelve un obj
                 //cod = Session["codigovoucher"].ToString(); 
-                Session.Add("codigovoucher", codigo);
+                Session.Add("codigoVoucher", codigo);
                 Response.Redirect("ListadoArt.aspx", false);
 
             }
