@@ -9,7 +9,7 @@ using Dominio;
 
 namespace Negocio
 {
-    public class ArticuloNegocio 
+    public class ArticuloNegocio
     {
         public List<Articulo> listar() //1. Metodo para que lea los registros de la base de datos
         {
@@ -25,7 +25,7 @@ namespace Negocio
                 {
                     int id = (int)datos.Lector["Id"];
                     Articulo existente = lista.FirstOrDefault(a => a.Id == id);
-                    if(existente == null)
+                    if (existente == null)
                     {
                         Articulo aux = new Articulo();
                         aux.Id = id;
@@ -54,9 +54,10 @@ namespace Negocio
                             });
                         }
                         lista.Add(aux);
-                    } else
+                    }
+                    else
                     {
-                        if(datos.Lector["IdImagen"] != DBNull.Value)
+                        if (datos.Lector["IdImagen"] != DBNull.Value)
                         {
                             existente.Imagen.Add(new Imagen
                             {
@@ -196,6 +197,52 @@ namespace Negocio
             {
 
                 throw ex;
+            }
+        }
+
+        public Articulo obtenerPorId(int id)
+        {
+            Articulo articulo = null;
+            AccesoDatos datos = new AccesoDatos();
+
+            try
+            {
+                datos.setearConsulta(@"SELECT A.Id, A.Nombre, A.Descripcion, I.Id AS IdImagen, I.ImagenUrl FROM ARTICULOS A INNER JOIN IMAGENES I ON A.Id = I.IdArticulo WHERE A.Id = @id");
+                datos.setearParametros("@id", id);
+                datos.ejecutarLectura();
+
+                while (datos.Lector.Read())
+                {
+                    //Se inicializa una sola vez el artículo y se carga el nombre y la descripción
+                    if (articulo == null)
+                    {
+                        articulo = new Articulo();
+                        articulo.Id = id;
+                        articulo.Nombre = (string)datos.Lector["Nombre"];
+                        articulo.Descripcion = (string)datos.Lector["Descripcion"];
+                        articulo.Imagen = new List<Imagen>();
+                    }
+
+                    //Se recorren las imágenes del artículo evitando que se repitan los txt
+                    if (datos.Lector["IdImagen"] != DBNull.Value)
+                    {
+                        articulo.Imagen.Add(new Imagen
+                        {
+                            Id = (int)datos.Lector["IdImagen"],
+                            Url = (string)datos.Lector["ImagenUrl"]
+                        });
+                    }
+                }
+
+                return articulo;
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            finally
+            {
+                datos.cerrarConexion();
             }
         }
     }
