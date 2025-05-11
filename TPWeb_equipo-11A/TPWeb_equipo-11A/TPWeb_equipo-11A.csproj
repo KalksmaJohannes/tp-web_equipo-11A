@@ -71,6 +71,7 @@
     <Content Include="ListadoArt.aspx" />
     <Content Include="Global.asax" />
     <Content Include="Default.aspx" />
+    <Content Include="ProductoCanjeado.aspx" />
     <Content Include="Web.config" />
   </ItemGroup>
   <ItemGroup>
@@ -97,6 +98,13 @@
     </Compile>
     <Compile Include="Principal.Master.designer.cs">
       <DependentUpon>Principal.Master</DependentUpon>
+    </Compile>
+    <Compile Include="ProductoCanjeado.aspx.cs">
+      <DependentUpon>ProductoCanjeado.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="ProductoCanjeado.aspx.designer.cs">
+      <DependentUpon>ProductoCanjeado.aspx</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Default.aspx.cs">
