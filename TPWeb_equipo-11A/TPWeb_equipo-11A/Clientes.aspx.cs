@@ -32,7 +32,7 @@ namespace TPWeb_equipo_11A
             try
             {
                 Cliente nuevo = new Cliente();
-                nuevo.Documento = Documento;
+                nuevo.Documento = txtDNI.Text;
                 nuevo.Nombre = txtNombre.Text;
                 nuevo.Apellido = txtApellido.Text;
                 nuevo.Email = txtEmail.Text;
