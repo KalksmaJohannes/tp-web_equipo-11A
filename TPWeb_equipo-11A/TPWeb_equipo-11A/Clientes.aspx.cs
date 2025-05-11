@@ -64,6 +64,8 @@ namespace TPWeb_equipo_11A
 
                 throw ex;
             }
+
+            Response.Redirect("ProductoCanjeado.aspx");
         }
 
         protected void btnValidarDni_Click(object sender, EventArgs e)
