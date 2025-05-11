@@ -2,6 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Cryptography.X509Certificates;
 using System.Text;
 using System.Threading.Tasks;
 using Dominio;
@@ -44,11 +45,13 @@ namespace Negocio
             AccesoDatos datos = new AccesoDatos();
             try
             {
-                datos.setearConsulta("select Id, Documento, Nombre, Apellido, Email, Direccion, Ciudad, CP from Clientes");
+                datos.setearConsulta("select Id, Documento, Nombre, Apellido, Email, Direccion, Ciudad, CP from Clientes WHERE Documento = @documento");
+                datos.setearParametros("@documento", documento);
                 datos.ejecutarLectura();
+
+                Cliente aux = new Cliente();
                 while (datos.Lector.Read())
                 {
-                    Cliente aux = new Cliente();
                     aux.Id = (int)datos.Lector["Id"];
                     aux.Documento = (string)datos.Lector["Documento"];
                     aux.Apellido = (string)datos.Lector["Apellido"];
@@ -57,10 +60,8 @@ namespace Negocio
                     aux.Direccion = (string)datos.Lector["Direccion"];
                     aux.Ciudad = (string)datos.Lector["Ciudad"];
                     aux.CodigoPostal = (int)datos.Lector["CP"];
-                    if(aux.Documento == documento)
-                    {
-                        return aux;
-                    }   
+                    return aux;
+                    
                 }
                 return null;
             }
@@ -74,6 +75,7 @@ namespace Negocio
             {
                 datos.cerrarConexion();
             }
+
         }
     }
 }

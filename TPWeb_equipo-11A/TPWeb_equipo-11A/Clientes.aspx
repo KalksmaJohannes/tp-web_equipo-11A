@@ -9,40 +9,43 @@
      <div class="row mb-3">
          <div class="col-md-4">
              <label for="txtDNI" class="form-label">DNI</label>
-             <asp:TextBox ID="txtDNI" runat="server" CssClass="form-control" placeholder="99888777"  />
+             <asp:TextBox ID="txtDNI" runat="server" CssClass="form-control" placeholder="99888777" type="number" BorderWidth="2" />
+             <div>
+                 <asp:Label ID="lblDni" runat="server" Text="Label"></asp:Label>
+             </div>
+             
+             <asp:Button ID="btnValidarDni" runat="server" Text="Validar DNI" CssClass="btn btn-primary mt-2" OnClick="btnValidarDni_Click"/>
          </div>
      </div>
-
      <div class="row mb-3">
          <div class="col-md-4">
              <label for="txtNombre" class="form-label">Nombre</label>
-             <asp:TextBox ID="txtNombre" runat="server" CssClass="form-control" placeholder="Nombre" />
+             <asp:TextBox ID="txtNombre" runat="server" CssClass="form-control" placeholder="Nombre" Enabled="false" BorderWidth="2"/>
          </div>
          <div class="col-md-4">
              <label for="txtApellido" class="form-label">Apellido</label>
-             <asp:TextBox ID="txtApellido" runat="server" CssClass="form-control" placeholder="Apellido"/>
+             <asp:TextBox ID="txtApellido" runat="server" CssClass="form-control" placeholder="Apellido" Enabled="false" BorderWidth="2" />
          </div>
          <div class="col-md-4">
              <label for="txtEmail" class="form-label">Email</label>
              <div class="input-group">
                  <span class="input-group-text">@</span>
-                 <asp:TextBox ID="txtEmail" runat="server" CssClass="form-control" placeholder="nombre@mail.com"/>
+                 <asp:TextBox ID="txtEmail" runat="server" CssClass="form-control" placeholder="nombre@mail.com" Enabled="false" BorderWidth="2" />
              </div>
          </div>
      </div>
-
      <div class="row mb-3">
          <div class="col-md-4">
              <label for="txtDireccion" class="form-label">Dirección</label>
-             <asp:TextBox ID="txtDireccion" runat="server" CssClass="form-control" placeholder="Calle 123" />
+             <asp:TextBox ID="txtDireccion" runat="server" CssClass="form-control" placeholder="Calle 123" Enabled="false" BorderWidth="2" />
          </div>
          <div class="col-md-4">
              <label for="txtCiudad" class="form-label">Ciudad</label>
-             <asp:TextBox ID="txtCiudad" runat="server" CssClass="form-control" placeholder="Ciudad" />
+             <asp:TextBox ID="txtCiudad" runat="server" CssClass="form-control" placeholder="Ciudad" Enabled="false" BorderWidth="2" />
          </div>
          <div class="col-md-4">
              <label for="txtCP" class="form-label">CP</label>
-             <asp:TextBox ID="txtCP" runat="server" CssClass="form-control" placeholder="xxxx" />
+             <asp:TextBox ID="txtCP" runat="server" CssClass="form-control" placeholder="xxxx" Enabled="false" BorderWidth="2" />
          </div>
      </div>
 
