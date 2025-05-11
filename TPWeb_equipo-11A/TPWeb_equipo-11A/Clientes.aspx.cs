@@ -26,22 +26,25 @@ namespace TPWeb_equipo_11A
         protected void btnParticipar_Click(object sender, EventArgs e)
         {
             ClienteNegocio negocio = new ClienteNegocio();
-
-
+            Documento = txtDNI.Text;
 
             try
             {
-                Cliente nuevo = new Cliente();
-                nuevo.Documento = txtDNI.Text;
-                nuevo.Nombre = txtNombre.Text;
-                nuevo.Apellido = txtApellido.Text;
-                nuevo.Email = txtEmail.Text;
-                nuevo.Direccion = txtDireccion.Text;
-                nuevo.Ciudad = txtCiudad.Text;
-                nuevo.CodigoPostal = int.Parse(txtCP.Text);
+                Cliente nuevo = negocio.existeCliente(Documento);
+                if (nuevo == null)
+                {
+                    nuevo = new Cliente();
 
-                negocio.agregarCliente(nuevo);
+                    nuevo.Documento = Documento;
+                    nuevo.Nombre = txtNombre.Text;
+                    nuevo.Apellido = txtApellido.Text;
+                    nuevo.Email = txtEmail.Text;
+                    nuevo.Direccion = txtDireccion.Text;
+                    nuevo.Ciudad = txtCiudad.Text;
+                    nuevo.CodigoPostal = int.Parse(txtCP.Text);
 
+                    negocio.agregarCliente(nuevo);
+                }
                 ScriptManager.RegisterStartupScript(this, this.GetType(), "alerta", "alert('¡Registro exitoso!');", true);
             }
             catch (Exception ex)
