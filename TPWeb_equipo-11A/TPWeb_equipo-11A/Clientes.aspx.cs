@@ -28,6 +28,18 @@ namespace TPWeb_equipo_11A
             ClienteNegocio negocio = new ClienteNegocio();
             Documento = txtDNI.Text;
 
+            //validacion de campos vacios
+            if (string.IsNullOrWhiteSpace(txtNombre.Text) ||
+                string.IsNullOrWhiteSpace(txtApellido.Text) ||
+                string.IsNullOrWhiteSpace(txtEmail.Text) ||
+                string.IsNullOrWhiteSpace(txtDireccion.Text) ||
+                string.IsNullOrWhiteSpace(txtCiudad.Text) ||
+                string.IsNullOrWhiteSpace(txtCP.Text))
+            {
+                ScriptManager.RegisterStartupScript(this, this.GetType(), "alerta", "alert('Todos los campos son obligatorios.');", true);
+                return;
+            }
+
             try
             {
                 Cliente nuevo = negocio.existeCliente(Documento);
