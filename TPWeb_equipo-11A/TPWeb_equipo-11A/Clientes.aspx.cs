@@ -42,6 +42,105 @@ namespace TPWeb_equipo_11A
                 return;
             }
 
+            //validar Nombre
+            if (txtNombre.Text.Length > 50)
+            {
+                lblNombre.ForeColor = System.Drawing.Color.Red;
+                lblNombre.Text = "Excediste los 50 caracteres permitidos.";
+                txtNombre.CssClass = "form-control form-control-lg mx-auto form-control is-invalid";
+                return;
+            }
+            else
+            {
+                lblNombre.ForeColor = System.Drawing.Color.Green;
+                lblNombre.Text = "✓ Campo válido.";
+                txtNombre.CssClass = "form-control is-valid";
+            }
+
+            //validacion de apellido 50
+            if (txtApellido.Text.Length > 50)
+            {
+                lblApellido.ForeColor = System.Drawing.Color.Red;
+                lblApellido.Text = "Excediste los 50 caracteres permitidos.";
+                txtApellido.CssClass = "form-control form-control-lg mx-auto form-control is-invalid";
+                return;
+            }
+            else
+            {
+                lblApellido.ForeColor = System.Drawing.Color.Green;
+                lblApellido.Text = "✓ Campo válido.";
+                txtApellido.CssClass = "form-control is-valid";
+            }
+
+            //validacion de mail 50
+            if (!txtEmail.Text.Contains("@") || !txtEmail.Text.Contains(".com"))
+            {
+                lblEmail.ForeColor = System.Drawing.Color.Red;
+                lblEmail.Text = "Formato de mail incorreto.";
+                txtEmail.CssClass = "form-control form-control-lg mx-auto form-control is-invalid";
+                return;
+            }
+            else if (txtEmail.Text.Length > 50)
+            {
+                lblEmail.ForeColor = System.Drawing.Color.Red;
+                lblEmail.Text = "Excediste los 50 caracteres permitidos en el email.";
+                txtEmail.CssClass = "form-control is-invalid";
+                return;
+            }
+            else
+            {
+                lblEmail.ForeColor = System.Drawing.Color.Green;
+                lblEmail.Text = "✓ Campo válido.";
+                txtEmail.CssClass = "form-control is-valid";
+            }
+
+            //validacion de direccion 50
+            if (txtDireccion.Text.Length > 50)
+            {
+                lblDireccion.ForeColor = System.Drawing.Color.Red;
+                lblDireccion.Text = "Excediste los 50 caracteres permitidos.";
+                txtDireccion.CssClass = "form-control form-control-lg mx-auto form-control is-invalid";
+                return;
+            }
+            else
+            {
+                lblDireccion.ForeColor = System.Drawing.Color.Green;
+                lblDireccion.Text = "✓ Campo válido.";
+                txtDireccion.CssClass = "form-control is-valid";
+            }
+
+            //validacion de ciudad 50
+            if (txtCiudad.Text.Length > 50)
+            {
+                lblCiudad.ForeColor = System.Drawing.Color.Red;
+                lblCiudad.Text = "Excediste los 50 caracteres permitidos.";
+                txtCiudad.CssClass = "form-control form-control-lg mx-auto form-control is-invalid";
+                return;
+            }
+            else
+            {
+                lblCiudad.ForeColor = System.Drawing.Color.Green;
+                lblCiudad.Text = "✓ Campo válido.";
+                txtCiudad.CssClass = "form-control is-valid";
+            }
+
+            //validacion de CP
+            int CodigoPostal;//variable auxiliar para guardar el contenido del txt.CP
+
+            if (!int.TryParse(txtCP.Text, out CodigoPostal) || CodigoPostal < 0)
+            {
+                lblCP.ForeColor = System.Drawing.Color.Red;
+                lblCP.Text = "Error de formato. Ingresa solo números.";
+                txtCP.CssClass = "form-control form-control-lg mx-auto form-control is-invalid";
+                return;
+            }
+            else
+            {
+                lblCP.ForeColor = System.Drawing.Color.Green;
+                lblCP.Text = "✓ Campo válido.";
+                txtCP.CssClass = "form-control is-valid";
+            }
+
             try
             {
                 Cliente nuevo = negocio.existeCliente(Documento);
