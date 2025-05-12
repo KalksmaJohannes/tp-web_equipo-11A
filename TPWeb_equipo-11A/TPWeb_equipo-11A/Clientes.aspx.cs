@@ -17,6 +17,8 @@ namespace TPWeb_equipo_11A
         public ClienteNegocio Negocio { get; set; }
         public string Documento { get; set; }
 
+        public Vouchers vouchers { get; set; }
+
 
         protected void Page_Load(object sender, EventArgs e)
         {
@@ -56,8 +58,31 @@ namespace TPWeb_equipo_11A
                     nuevo.CodigoPostal = int.Parse(txtCP.Text);
 
                     negocio.agregarCliente(nuevo);
+                    Session.Add("IdCliente", negocio.existeCliente(nuevo.Documento).Id);
+                    ScriptManager.RegisterStartupScript(this, this.GetType(), "alerta", "alert('¡Registro exitoso!');", true);
                 }
-                ScriptManager.RegisterStartupScript(this, this.GetType(), "alerta", "alert('¡Registro exitoso!');", true);
+                else
+                {
+                    nuevo = negocio.existeCliente(Documento);
+                    Session.Add("IdCliente", nuevo.Id);
+
+
+
+                }
+
+
+
+                vouchers = new Vouchers();
+
+                vouchers.CodigoVoucher = (string)Session["codigoVoucher"];
+                vouchers.Articulo = new Articulo();
+                vouchers.Articulo.Id = Convert.ToInt32(Session["articuloSeleccionado"]);
+                vouchers.Cliente = new Cliente();
+                vouchers.Cliente.Id = (int)Session["IdCliente"];
+                VoucherNegocio negocioVouchers = new VoucherNegocio();
+                negocioVouchers.modificar(vouchers);
+
+                Response.Redirect("ProductoCanjeado.aspx");
             }
             catch (Exception ex)
             {

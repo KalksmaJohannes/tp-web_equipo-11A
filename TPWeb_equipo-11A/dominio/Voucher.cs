@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Dominio
 {
-    public class Voucher
+    public class Vouchers
     {
         public string CodigoVoucher {  get; set; }
         public DateTime FechaCanje { get; set; }
