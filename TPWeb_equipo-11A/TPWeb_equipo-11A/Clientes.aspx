@@ -41,8 +41,8 @@
              <div class="input-group">
                  <span class="input-group-text">@</span>
                  <asp:TextBox ID="txtEmail" runat="server" CssClass="form-control" placeholder="nombre@mail.com" Enabled="false" BorderWidth="2" />
-                 <asp:Label ID="lblEmail" runat="server" Text="" CssClass="form-text"></asp:Label>
              </div>
+                 <asp:Label ID="lblEmail" runat="server" Text="" CssClass="form-text"></asp:Label>
          </div>
      </div>
 
