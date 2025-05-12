@@ -141,53 +141,63 @@ namespace TPWeb_equipo_11A
                 txtCP.CssClass = "form-control is-valid";
             }
 
-            try
+            if(CheckBoxTerminos.Checked == false)
             {
-                Cliente nuevo = negocio.existeCliente(Documento);
-                if (nuevo == null)
-                {
-                    nuevo = new Cliente();
-
-                    nuevo.Documento = Documento;
-                    nuevo.Nombre = txtNombre.Text;
-                    nuevo.Apellido = txtApellido.Text;
-                    nuevo.Email = txtEmail.Text;
-                    nuevo.Direccion = txtDireccion.Text;
-                    nuevo.Ciudad = txtCiudad.Text;
-                    nuevo.CodigoPostal = int.Parse(txtCP.Text);
-
-                    negocio.agregarCliente(nuevo);
-                    Session.Add("IdCliente", negocio.existeCliente(nuevo.Documento).Id);
-                    ScriptManager.RegisterStartupScript(this, this.GetType(), "alerta", "alert('¡Registro exitoso!');", true);
-                }
-                else
-                {
-                    nuevo = negocio.existeCliente(Documento);
-                    Session.Add("IdCliente", nuevo.Id);
-
-
-
-                }
-
-
-
-                vouchers = new Vouchers();
-
-                vouchers.CodigoVoucher = (string)Session["codigoVoucher"];
-                vouchers.Articulo = new Articulo();
-                vouchers.Articulo.Id = Convert.ToInt32(Session["articuloSeleccionado"]);
-                vouchers.Cliente = new Cliente();
-                vouchers.Cliente.Id = (int)Session["IdCliente"];
-                VoucherNegocio negocioVouchers = new VoucherNegocio();
-                negocioVouchers.modificar(vouchers);
-
-                Response.Redirect("ProductoCanjeado.aspx");
+                lblTerminos.ForeColor = System.Drawing.Color.Red;
+                return;
             }
-            catch (Exception ex)
+            else
             {
-
-                throw ex;
+                lblTerminos.ForeColor = System.Drawing.Color.Green;
             }
+
+                try
+                {
+                    Cliente nuevo = negocio.existeCliente(Documento);
+                    if (nuevo == null)
+                    {
+                        nuevo = new Cliente();
+
+                        nuevo.Documento = Documento;
+                        nuevo.Nombre = txtNombre.Text;
+                        nuevo.Apellido = txtApellido.Text;
+                        nuevo.Email = txtEmail.Text;
+                        nuevo.Direccion = txtDireccion.Text;
+                        nuevo.Ciudad = txtCiudad.Text;
+                        nuevo.CodigoPostal = int.Parse(txtCP.Text);
+
+                        negocio.agregarCliente(nuevo);
+                        Session.Add("IdCliente", negocio.existeCliente(nuevo.Documento).Id);
+                        ScriptManager.RegisterStartupScript(this, this.GetType(), "alerta", "alert('¡Registro exitoso!');", true);
+                    }
+                    else
+                    {
+                        nuevo = negocio.existeCliente(Documento);
+                        Session.Add("IdCliente", nuevo.Id);
+
+
+
+                    }
+
+
+
+                    vouchers = new Vouchers();
+
+                    vouchers.CodigoVoucher = (string)Session["codigoVoucher"];
+                    vouchers.Articulo = new Articulo();
+                    vouchers.Articulo.Id = Convert.ToInt32(Session["articuloSeleccionado"]);
+                    vouchers.Cliente = new Cliente();
+                    vouchers.Cliente.Id = (int)Session["IdCliente"];
+                    VoucherNegocio negocioVouchers = new VoucherNegocio();
+                    negocioVouchers.modificar(vouchers);
+
+                    Response.Redirect("ProductoCanjeado.aspx");
+                }
+                catch (Exception ex)
+                {
+
+                    throw ex;
+                }
 
             Response.Redirect("ProductoCanjeado.aspx");
         }
@@ -205,16 +215,23 @@ namespace TPWeb_equipo_11A
                     return;
                 }
                 else
-                if (Documento.Length < 6)
+                if (Documento.Length < 6 & Documento.Length > 8)
                 {
                     lblDni.ForeColor = System.Drawing.Color.Red;
                     lblDni.Text = "El DNI ingresado es inválido!";
                     txtDNI.CssClass = "form-control form-control-lg mx-auto form-control is-invalid";
-
+                    return;
+                } 
+                else
+                if (Convert.ToInt32(Documento) <= 0)
+                {
+                    lblDni.ForeColor = System.Drawing.Color.Red;
+                    lblDni.Text = "El DNI debe ser un numero positivo!";
+                    txtDNI.CssClass = "form-control form-control-lg mx-auto form-control is-invalid";
                     return;
                 }
 
-                Negocio = new ClienteNegocio();
+                    Negocio = new ClienteNegocio();
                 Cliente = new Cliente();
                 Cliente = Negocio.existeCliente(Documento);
 

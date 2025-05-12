@@ -13,7 +13,7 @@
              <label for="txtDNI" class="form-label">DNI</label>
              <asp:TextBox ID="txtDNI" runat="server" CssClass="form-control" placeholder="99888777" type="number" BorderWidth="2" />
              <div>
-                 <asp:Label ID="lblDni" runat="server" Text="Label"></asp:Label>
+                 <asp:Label ID="lblDni" runat="server" Text=""></asp:Label>
              </div>
              
              <asp:Button ID="btnValidarDni" runat="server" Text="Validar DNI" CssClass="btn btn-primary mt-2" OnClick="btnValidarDni_Click"/>
@@ -74,10 +74,8 @@
     <div class="col-md-4">
         <!--TyC-->
      <div class="form-check">
-         <input class="form-check-input" type="checkbox" value="" id="checkDefault">
-         <label class="form-check-label" for="checkDefault">
-             Acepto los términos y condiciones
-         </label>
+         <asp:CheckBox ID="CheckBoxTerminos" runat="server" />
+         <asp:Label ID="lblTerminos" runat="server" Text="Acepto los términos y condiciones"></asp:Label>
      </div>
      </div>
 
